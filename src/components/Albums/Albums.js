@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getAlbums } from '../../store/actions/albums';
 import styles from './Albums.module.css';
@@ -31,7 +31,9 @@ class Albums extends Component {
         this.props.getAlbums(userId);
       }
     } else {
-      this.props.getAlbums();
+      if (!this.props.albums.length) {
+        this.props.getAlbums();
+      }
     }
   }
 
@@ -42,14 +44,17 @@ class Albums extends Component {
       albums = <h3 style={{textAlign: 'center'}}>Loading...</h3>;
     } else if (this.props.albums.length) {
       albums =
-        <div className={styles.tiles}>
-          {this.props.albums.map(album =>
-            <div key={album.id} className={styles.tile}>
-              <h4 className={styles.id}>{album.id}</h4>
-              <p className={styles.title}>{album.title}</p>
-            </div>
-          )}
-        </div>;
+        <Fragment>
+          <h2 style={{textAlign: 'center'}}>Albums list</h2>
+          <div className={styles.tiles}>
+            {this.props.albums.map(album =>
+              <div key={album.id} className={styles.tile}>
+                <h4 className={styles.id}>{album.id}</h4>
+                <p className={styles.title}>{album.title}</p>
+              </div>
+            )}
+          </div>
+        </Fragment>;
     } else if (this.props.error) {
       albums = <ErrorCode error={this.props.error} />;
     }
