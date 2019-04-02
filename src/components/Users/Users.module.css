@@ -1,0 +1,29 @@
+.users { }
+
+.table {
+  border-collapse: collapse;
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: .8rem;
+}
+
+.table th {
+  font-weight: 700;
+  padding: .25rem;
+  border: 1px solid #333;
+}
+
+.table td {
+  padding: .25rem;
+  border: 1px solid #666;
+}
+
+.name a {
+  text-decoration: none;
+  color: #af4561;
+}
+
+.name a:hover,
+.name a:active {
+  text-decoration: underline;
+}

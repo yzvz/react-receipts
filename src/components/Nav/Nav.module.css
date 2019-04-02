@@ -1,0 +1,35 @@
+.nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: #737373;
+}
+
+.nav a {
+  padding: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #8eafff;
+  background: #444;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  transition:
+    color .1s,
+    background .1s;
+}
+
+.nav a + a {
+  border-left: none;
+}
+
+.nav a:active,
+.nav a:hover {
+  background: #666;
+  color: #00ce00;
+}
+
+.nav a.current {
+  background: #555;
+  color: #fffc27;
+}
