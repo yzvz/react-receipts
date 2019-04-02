@@ -1,26 +1,72 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+
 import './App.css';
+
+import asyncComponent from './hoc/asyncComponent';
+
+import Nav from './components/Nav/Nav';
+import Home from './components/Home/Home';
+
+import usersReducer from './store/reducers/users';
+import albumsReducer from './store/reducers/albums';
+
+const Users = asyncComponent(() => {
+  return import ('./components/Users/Users');
+});
+
+const User = asyncComponent(() => {
+  return import ('./components/User/User');
+});
+
+const Albums = asyncComponent(() => {
+  return import ('./components/Albums/Albums');
+});
+
+const logger = (store) => {
+  return next => {
+    return action => {
+      process.env.NODE_ENV === 'development' && console.log('[Middleware logger] :: dispatching action', action);
+      const result = next(action);
+      process.env.NODE_ENV === 'development' && console.log('[Middleware logger] :: next state', store.getState());
+      return result;
+    }
+  }
+}
+
+const componseEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const rootReducer = combineReducers({
+  usersReducer, albumsReducer
+});
+
+const store = createStore(rootReducer, componseEnhancers(applyMiddleware(logger, thunk)));
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Provider store={store}>
+        <BrowserRouter>
+          <div className="App">
+            <Nav />
+            <Switch>
+              <Route path="/home" component={Home} />
+              <Route path="/users" exact component={Users} />
+              <Route path="/users/:id" component={User} />
+              <Route path="/albums" exact component={Albums} />
+              <Redirect from="/" to="/home" />
+              <Route render={() => {
+                return (
+                  <h1 style={{textAlign: 'center'}}>Not found.</h1>
+                );
+              }}/>
+            </Switch>
+          </div>
+        </BrowserRouter>
+      </Provider>
     );
   }
 }

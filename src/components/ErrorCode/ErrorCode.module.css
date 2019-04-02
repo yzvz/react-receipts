@@ -1,0 +1,10 @@
+.code {
+  display: block;
+  background: #ffda9d;
+  color: #f75f43;
+  padding: .5rem;
+  margin: 1rem auto;
+  max-width: 500px;
+  border: 1px solid #f74444;
+  text-align: center;
+}
