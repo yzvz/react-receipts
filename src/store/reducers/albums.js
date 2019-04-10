@@ -1,8 +1,4 @@
-import {
-  GET_ALBUMS_LOADING,
-  GET_ALBUMS_SUCCESS,
-  GET_ALBUMS_ERROR
-} from '../actions/albums';
+import * as aT from '../actionTypes';
 
 const initialState = {
   albums: [],
@@ -12,11 +8,11 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_ALBUMS_LOADING:
+    case aT.GET_ALBUMS_LOADING:
       return { ...state, albumsLoading: true }
-    case GET_ALBUMS_SUCCESS:
+    case aT.GET_ALBUMS_SUCCESS:
       return { ...state, albums: action.albums, albumsLoading: false };
-    case GET_ALBUMS_ERROR:
+    case aT.GET_ALBUMS_ERROR:
       return { ...state, albumsError: action.error, albumsLoading: false };
     default:
       break;
