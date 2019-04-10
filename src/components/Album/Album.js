@@ -13,8 +13,8 @@ function mapStateToProps(state) {
     loading: state.albumsReducer.albumLoading,
 
     photos: state.photosReducer.photos,
-    photosError: state.photosReducer.error,
-    photosLoading: state.photosReducer.loading,
+    photosError: state.photosReducer.photosError,
+    photosLoading: state.photosReducer.photosLoading,
   };
 }
 

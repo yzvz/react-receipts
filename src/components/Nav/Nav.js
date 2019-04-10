@@ -8,6 +8,7 @@ const Nav = () => {
       <NavLink activeClassName={styles.current} to="/home">Home</NavLink>
       <NavLink activeClassName={styles.current} to="/users">Users</NavLink>
       <NavLink activeClassName={styles.current} to="/albums">Albums</NavLink>
+      <NavLink activeClassName={styles.current} to="/photos">Photos</NavLink>
     </nav>
   );
 };

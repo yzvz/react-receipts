@@ -19,6 +19,7 @@ const Users = asyncComponent(() => import ('./components/Users/Users'));
 const User = asyncComponent(() => import ('./components/User/User'));
 const Albums = asyncComponent(() => import ('./components/Albums/Albums'));
 const Album = asyncComponent(() => import ('./components/Album/Album'));
+const Photos = asyncComponent(() => import ('./components/Photos/Photos'));
 const Photo = asyncComponent(() => import ('./components/Photo/Photo'));
 
 const logger = (store) => {
@@ -61,6 +62,7 @@ class App extends Component {
               <Route path="/users/:id" component={User} />
               <Route path="/albums" exact component={Albums} />
               <Route path="/albums/:id" component={Album} />
+              <Route path="/photos" exact component={Photos} />
               <Route path="/photos/:id" component={Photo} />
               <Redirect from="/" to="/home" />
               <Route render={() => {

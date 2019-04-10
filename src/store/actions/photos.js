@@ -1,13 +1,13 @@
-import * as aT from '../actionTypes';
+import * as actionTypes from '../actionTypes';
 
 export const getPhotos = (albumId) => {
   return {
-    type: aT.GET_PHOTOS_INIT, albumId
+    type: actionTypes.GET_PHOTOS_INIT, albumId
   }
 };
 
 export const getPhoto = (photoId) => {
   return {
-    type: aT.GET_PHOTO_INIT, photoId
+    type: actionTypes.GET_PHOTO_INIT, photoId
   }
 }
