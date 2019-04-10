@@ -1,13 +1,13 @@
-import * as aT from '../actionTypes';
+import * as actionTypes from '../actionTypes';
 
 export const getUsers = () => {
   return {
-    type: aT.GET_USERS_INIT
+    type: actionTypes.GET_USERS_INIT
   }
 };
 
 export const getUser = (userId) => {
   return {
-    type: aT.GET_USER_INIT, userId
+    type: actionTypes.GET_USER_INIT, userId
   }
 };
