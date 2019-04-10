@@ -16,6 +16,12 @@
   text-align: center;
   flex-direction: column;
   max-width: 10rem;
+  text-decoration: none;
+}
+
+.tile:hover,
+.tile:active {
+  box-shadow: 0 0 15px rgba(0,0,0,.5);
 }
 
 .id {

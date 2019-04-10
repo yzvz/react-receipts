@@ -10,21 +10,16 @@ import Nav from './components/Nav/Nav';
 import Home from './components/Home/Home';
 import usersReducer from './store/reducers/users';
 import albumsReducer from './store/reducers/albums';
-import { watchUsers, watchAlbums } from './store/sagas';
+import photosReducer from './store/reducers/photos';
+import { watchUsers, watchAlbums, watchPhotos } from './store/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const Users = asyncComponent(() => {
-  return import ('./components/Users/Users');
-});
-
-const User = asyncComponent(() => {
-  return import ('./components/User/User');
-});
-
-const Albums = asyncComponent(() => {
-  return import ('./components/Albums/Albums');
-});
+const Users = asyncComponent(() => import ('./components/Users/Users'));
+const User = asyncComponent(() => import ('./components/User/User'));
+const Albums = asyncComponent(() => import ('./components/Albums/Albums'));
+const Album = asyncComponent(() => import ('./components/Album/Album'));
+const Photo = asyncComponent(() => import ('./components/Photo/Photo'));
 
 const logger = (store) => {
   return next => {
@@ -40,7 +35,7 @@ const logger = (store) => {
 const componseEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-  usersReducer, albumsReducer
+  usersReducer, albumsReducer, photosReducer
 });
 
 const store = createStore(rootReducer,
@@ -51,6 +46,7 @@ const store = createStore(rootReducer,
 
 sagaMiddleware.run(watchUsers);
 sagaMiddleware.run(watchAlbums);
+sagaMiddleware.run(watchPhotos);
 
 class App extends Component {
   render() {
@@ -64,6 +60,8 @@ class App extends Component {
               <Route path="/users" exact component={Users} />
               <Route path="/users/:id" component={User} />
               <Route path="/albums" exact component={Albums} />
+              <Route path="/albums/:id" component={Album} />
+              <Route path="/photos/:id" component={Photo} />
               <Redirect from="/" to="/home" />
               <Route render={() => {
                 return (

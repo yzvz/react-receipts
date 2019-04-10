@@ -18,7 +18,7 @@ const reducer = (state = initialState, action) => {
     case aT.GET_USERS_ERROR:
       return { ...state, usersError: action.error, usersLoading: false };
     case aT.GET_USER_LOADING:
-    return { ...state, userError: null, userLoading: true }
+      return { ...state, userError: null, userLoading: true }
     case aT.GET_USER_SUCCESS:
       return { ...state, user: action.user, userLoading: false }
     case aT.GET_USER_ERROR:
