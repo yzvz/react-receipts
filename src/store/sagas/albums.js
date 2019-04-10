@@ -13,3 +13,15 @@ export function* albumsSaga(action) {
     yield put({ type: aT.GET_ALBUMS_ERROR, error });
   }
 }
+
+export function* albumSaga(action) {
+  yield put({ type: aT.GET_ALBUM_LOADING });
+
+  try {
+    const response = yield axios.get('/albums/' + action.albumId);
+    yield put({ type: aT.GET_ALBUM_SUCCESS, album: response.data });
+    yield put({ type: aT.GET_ALBUM_PHOTOS_INIT, albumId: action.albumId });
+  } catch (error) {
+    yield put({ type: aT.GET_ALBUM_ERROR, error });
+  }
+}

@@ -20,6 +20,12 @@ function mapDispatchToProps(dispatch) {
 }
 
 class Albums extends Component {
+  handleAlbumClick = (ev, albumId) => {
+    ev.preventDefault();
+
+    this.props.history.push('/albums/' + albumId);
+  }
+
   componentDidMount() {
     const userId = parseInt(this.props.match.params.id, 10);
 
@@ -57,10 +63,10 @@ class Albums extends Component {
           <h2 style={{textAlign: 'center'}}>Albums list</h2>
           <div className={styles.tiles}>
             {this.props.albums.map(album =>
-              <div key={album.id} className={styles.tile}>
+              <a key={album.id} className={styles.tile} href="#0" onClick={(ev) => this.handleAlbumClick(ev, album.id)}>
                 <h4 className={styles.id}>{album.id}</h4>
                 <p className={styles.title}>{album.title}</p>
-              </div>
+              </a>
             )}
           </div>
         </Fragment>;

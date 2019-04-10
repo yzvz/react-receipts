@@ -1,0 +1,48 @@
+.album {
+
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #333;
+  align-itrems: flex-start;
+}
+
+.id {
+  margin: .25rem;
+  padding: .25rem;
+  font-size: 5rem;
+  font-weight: 700;
+  border: 1px solid #999;
+  background: #f8f8f8;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  max-width: 10rem;
+  justify-content: center;
+}
+
+.photos {
+  margin: .25rem;
+  padding: .25rem;
+  background: #f9f9f9;
+  border: 1px solid #999;
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+}
+
+.photo {
+  box-shadow: 0 0 5px rgba(0, 0, 0, .25);
+  margin: .25rem;
+}
+
+.photo img {
+  display: block;
+}
+
+.photo:hover,
+.photo:active {
+  box-shadow: 0 0 15px rgba(0, 0, 0, .5);
+}
