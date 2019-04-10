@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
-
 import './App.css';
-
 import asyncComponent from './hoc/asyncComponent';
-
 import Nav from './components/Nav/Nav';
 import Home from './components/Home/Home';
-
 import usersReducer from './store/reducers/users';
 import albumsReducer from './store/reducers/albums';
+import { watchUsers, watchAlbums } from './store/sagas';
+
+const sagaMiddleware = createSagaMiddleware();
 
 const Users = asyncComponent(() => {
   return import ('./components/Users/Users');
@@ -43,7 +43,14 @@ const rootReducer = combineReducers({
   usersReducer, albumsReducer
 });
 
-const store = createStore(rootReducer, componseEnhancers(applyMiddleware(logger, thunk)));
+const store = createStore(rootReducer,
+  componseEnhancers(
+    applyMiddleware(logger, thunk, sagaMiddleware)
+  )
+);
+
+sagaMiddleware.run(watchUsers);
+sagaMiddleware.run(watchAlbums);
 
 class App extends Component {
   render() {

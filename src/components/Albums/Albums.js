@@ -31,7 +31,16 @@ class Albums extends Component {
         this.props.getAlbums(userId);
       }
     } else {
-      if (!this.props.albums.length) {
+      if (
+          !this.props.albums.length ||
+          this.props.albums.reduce((prev, curr) => {
+            if (!prev.includes(curr.userId)) {
+              prev.push(curr.userId);
+            }
+
+            return prev;
+          }, []).length === 1
+        ) {
         this.props.getAlbums();
       }
     }
@@ -58,7 +67,6 @@ class Albums extends Component {
     } else if (this.props.error) {
       albums = <ErrorCode error={this.props.error} />;
     }
-
 
     return (
       <div className={styles.albums}>
