@@ -1,13 +1,15 @@
-import * as actionTypes from '../actionTypes';
+import * as actionTypes from "../actionTypes";
 
-export const getAlbums = (userId) => {
+export const getAlbums = userId => {
   return {
-    type: actionTypes.GET_ALBUMS_INIT, userId
-  }
+    type: actionTypes.GET_ALBUMS_INIT,
+    userId
+  };
 };
 
-export const getAlbum = (albumId) => {
+export const getAlbum = albumId => {
   return {
-    type: actionTypes.GET_ALBUM_INIT, albumId
-  }
-}
+    type: actionTypes.GET_ALBUM_INIT,
+    albumId
+  };
+};

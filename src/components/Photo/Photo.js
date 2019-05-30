@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getPhoto } from '../../store/actions/photos';
-import ErrorCode from '../ErrorCode/ErrorCode';
-import styles from './Photo.module.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getPhoto } from "../../store/actions/photos";
+import ErrorCode from "../ErrorCode/ErrorCode";
+import styles from "./Photo.module.css";
 
 function mapStateToProps(state) {
   return {
     photos: state.photosReducer.photos,
     photo: state.photosReducer.photo,
     error: state.photosReducer.photoError,
-    loading: state.photosReducer.photoLoading,
+    loading: state.photosReducer.photoLoading
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getPhoto: (photoId) => dispatch(getPhoto(photoId))
+    getPhoto: photoId => dispatch(getPhoto(photoId))
   };
 }
 
 class Photo extends Component {
   state = {
     photo: null
-  }
+  };
 
   componentDidMount() {
     const photoId = parseInt(this.props.match.params.id, 10);
@@ -43,14 +43,26 @@ class Photo extends Component {
   }
 
   render() {
-    let photo = <h2 style={{textAlign: 'center'}}>No photo found.</h2>;
+    let photo = <h2 style={{ textAlign: "center" }}>No photo found.</h2>;
 
     if (this.props.loading) {
-      photo = <h2 style={{textAlign: 'center'}}>Loading...</h2>;
+      photo = <h2 style={{ textAlign: "center" }}>Loading...</h2>;
     } else if (this.state.photo) {
-      photo = <img src={this.state.photo.url} alt={this.state.photo.title} className={styles.photo} />
+      photo = (
+        <img
+          src={this.state.photo.url}
+          alt={this.state.photo.title}
+          className={styles.photo}
+        />
+      );
     } else if (this.props.photo) {
-      photo = <img src={this.props.photo.url} alt={this.props.photo.title} className={styles.photo} />
+      photo = (
+        <img
+          src={this.props.photo.url}
+          alt={this.props.photo.title}
+          className={styles.photo}
+        />
+      );
     } else if (this.props.error) {
       photo = <ErrorCode error={this.props.error} />;
     }
@@ -60,5 +72,6 @@ class Photo extends Component {
 }
 
 export default connect(
-  mapStateToProps, mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Photo);

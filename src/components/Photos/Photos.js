@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getPhotos } from '../../store/actions/photos';
-import { NavLink } from 'react-router-dom';
-import styles from './Photos.module.css';
-import ErrorCode from '../ErrorCode/ErrorCode';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getPhotos } from "../../store/actions/photos";
+import { NavLink } from "react-router-dom";
+import styles from "./Photos.module.css";
+import ErrorCode from "../ErrorCode/ErrorCode";
 
 function mapStateToProps(state) {
   return {
@@ -29,35 +29,35 @@ class Photos extends Component {
         }
 
         return prev;
-        }, []).length === 1
-      ) {
+      }, []).length === 1
+    ) {
       this.props.getPhotos();
     }
   }
 
   render() {
-    let photos = <h2 style={{textAlign: 'center'}}>No photos found.</h2>;
+    let photos = <h2 style={{ textAlign: "center" }}>No photos found.</h2>;
 
     if (this.props.loading) {
-      photos = <h2 style={{textAlign: 'center'}}>Loading...</h2>;
+      photos = <h2 style={{ textAlign: "center" }}>Loading...</h2>;
     } else if (this.props.photos.length) {
-      photos = this.props.photos.map(photo =>
-        <NavLink to={this.props.match.url + '/' + photo.id} className={styles.photo}>
+      photos = this.props.photos.map(photo => (
+        <NavLink
+          to={this.props.match.url + "/" + photo.id}
+          className={styles.photo}
+        >
           <img src={photo.thumbnailUrl} alt={photo.title} />
         </NavLink>
-      )
+      ));
     } else if (this.props.error) {
       photos = <ErrorCode error={this.props.error} />;
     }
 
-    return (
-      <div className={styles.photos}>
-        {photos}
-      </div>
-    );
+    return <div className={styles.photos}>{photos}</div>;
   }
 }
 
 export default connect(
-  mapStateToProps, mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Photos);
