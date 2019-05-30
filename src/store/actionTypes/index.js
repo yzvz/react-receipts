@@ -10,30 +10,27 @@ export {
   DELETE_USER,
   UPDATE_USER,
   CREATE_USER
-} from './users';
+} from "./users";
 
 export {
   GET_ALBUMS_INIT,
   GET_ALBUMS_LOADING,
   GET_ALBUMS_SUCCESS,
   GET_ALBUMS_ERROR,
-
   GET_ALBUM_INIT,
   GET_ALBUM_LOADING,
   GET_ALBUM_SUCCESS,
   GET_ALBUM_ERROR,
-
   GET_ALBUM_PHOTOS_INIT
-} from './albums';
+} from "./albums";
 
 export {
   GET_PHOTOS_INIT,
   GET_PHOTOS_LOADING,
   GET_PHOTOS_SUCCESS,
   GET_PHOTOS_ERROR,
-
   GET_PHOTO_INIT,
   GET_PHOTO_LOADING,
   GET_PHOTO_SUCCESS,
   GET_PHOTO_ERROR
-} from './photos';
+} from "./photos";

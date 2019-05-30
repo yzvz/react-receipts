@@ -1,8 +1,8 @@
-import { takeEvery } from 'redux-saga/effects';
-import { usersSaga, userSaga } from './users';
-import { albumsSaga, albumSaga } from './albums';
-import { photosSaga, photoSaga } from './photos';
-import * as actionTypes from '../actionTypes';
+import { takeEvery } from "redux-saga/effects";
+import { usersSaga, userSaga } from "./users";
+import { albumsSaga, albumSaga } from "./albums";
+import { photosSaga, photoSaga } from "./photos";
+import * as actionTypes from "../actionTypes";
 
 export function* watchUsers() {
   yield takeEvery(actionTypes.GET_USERS_INIT, usersSaga);
